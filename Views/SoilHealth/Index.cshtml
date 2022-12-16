@@ -1,0 +1,114 @@
+﻿@model IEnumerable<MainApp.Models.SoilHealthParameters>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SoilName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OC)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.N)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.K)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Zn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Mn)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaCO3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoilNature)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoilName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pH)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OC)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OM)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.N)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.P)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.K)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Zn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Mn)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CaCO3)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoilNature)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SoilId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SoilId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SoilId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

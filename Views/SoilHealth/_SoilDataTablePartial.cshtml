@@ -1,0 +1,122 @@
+﻿@model IEnumerable<MainApp.Models.SoilHealthParameters>
+
+
+@{
+    ViewData["Title"] = "SoilDataTable";
+}
+
+<h1>PredictCrop</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SoilName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.pH)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.K)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CaCO3)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoilNature)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoilName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.pH)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fe)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.K)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CaCO3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoilNature)
+                </td>
+                <td>
+                    @*@Html.ActionLink("Predict Crop", "PredictCrop", "PredictCrop", item.pH, new { @class = "myCustomLink" })*@
+                   @* @Html.ActionLink("Predict Crop", "PredictCrop", "PredictCrop", item.pH, new { @class = "btn btn-primary" })*@
+                    <button id="btn" type="button" class="btn btn-primary" value="Predict Crop">Predict Crop</button>
+               </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+<div id="MyPopup" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+ 
+            <div class="modal-body">
+                
+            </div>
+            <div class="modal-footer">
+                <input type="button" id="btnClosePopup" value="Close" class="btn btn-danger" data-dismiss="modal" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+ 
+    $("#btn").click(function (e) {
+        e.preventDefault();
+        var $buttonClicked = $(this);
+        var id = $buttonClicked.attr('data-id');
+        var options = { "backdrop": "static", keyboard: true };
+        $.ajax({
+            url: "@Url.Action("GetCropsList","SoilHealth")",
+            data: { ph: 1 },
+            type: "Get",
+            dataType: "html",
+            success: function (data) {
+                $('.modal-body').html(data);
+                $('#MyPopup').modal(options);
+                $('#MyPopup').modal('show');
+            },
+            error: function () {
+                alert("Dynamic content load failed.");
+            }
+        });
+        return false;
+    });
+    $("#btnClosePopup").click(function () {
+        $("#MyPopup").modal("hide");
+    });
+</script>
+
+<style type="text/css">
+    .myCustomLink {
+        color: green;
+        font-weight: bold;
+    }
+    
+</style> 

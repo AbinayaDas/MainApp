@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MainApp.Models.Crop>
+
+
+@{
+    ViewData["Title"] = "PredictCrop";
+}
+
+<h1>PredictCrop</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CropName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CropValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CropType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MinReqLandSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaxReqLandSize)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ReqSoilPh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PreferredWeatherCondition)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CropName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CropValue)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CropType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MinReqLandSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxReqLandSize)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReqSoilPh)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PreferredWeatherCondition)
+            </td>
+            
+        </tr>
+}
+    </tbody>
+</table>

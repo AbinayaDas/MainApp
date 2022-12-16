@@ -1,0 +1,86 @@
+﻿@model MainApp.Models.UserViewModel
+
+@{
+
+    ViewBag.Title = "Predict Crop";
+    //int? userId = Convert.ToInt32(Model.UserId);
+}
+
+<br />
+@using (Html.BeginForm())
+{
+    <div class="form-group row">
+        <label class="col-lg-2 control-label" for="hobies">Select User for whom we have to predict Crop:</label>
+        <div class="col-lg-6">
+            @Html.DropDownListFor(model => model.SelectedUser, Model.UserList, "--Select User--", new { @id="userid", @class = "form-control" , @onChange = "SelectedValue(this)"})
+        </div>
+    </div>
+
+        
+
+
+}
+
+<span>
+    @Html.ActionLink("Add Soil Info", "Index", "SoilHealth", @Model.SelectedUser, new { @class = "btn btn-success" })
+</span>
+<span></span>
+<div id="partialsoildata">
+    
+</div>
+
+<span>
+    <input id="hdnUserId" type="hidden" />
+</span>
+
+@if (Model.SelectedUser != null)
+{
+        <div class="form-group">
+            Selected User : @Model.SelectedUser
+            
+        </div>
+}
+<script>
+    function SelectedValue(ddlObject) {
+        //Selected value of dropdownlist
+        var selectedValue = ddlObject.value;
+        //Selected text of dropdownlist
+        var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
+        
+        $("#hdnUserId").val(selectedValue);
+        $.ajax({
+            url: "@Url.Action("GetSoilInfo","SoilHealth")",
+            data: { userid: selectedValue },
+            type: "Get",
+            dataType: "html",
+            success: function (data) {
+                //Whatever result you have got from your controller with html partial view replace with a specific html.
+                $("#partialsoildata").html(data); // HTML DOM replace
+            }
+        });
+        //alert popup with detail of seleceted value and text
+       // alert(" Selected Value: " + selectedValue + " -- " + "Selected Text: " + selectedText);
+    }
+    //$("#userid").change(function (event) {
+    //    var userId = $(this).val();
+    //    $.ajax({
+    //        url: "@Url.Action("GetUser","Controller")",
+    //        data: { id: userId },
+    //        type: "Get",
+    //        dataType: "html",
+    //        success: function (data) {
+    //            //Whatever result you have got from your controller with html partial view replace with a specific html.
+    //            $("#divPartialView").html(data); // HTML DOM replace
+    //        }
+    //    });
+    //});
+
+</script>
+<style type="text/css">
+
+    .addbtn {
+        color: blue;
+        font-weight: bold;
+    }
+</style>
+
